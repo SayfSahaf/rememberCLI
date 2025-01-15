@@ -183,6 +183,13 @@ def init(
     directory_name: Annotated[str, typer.Option('--dir-name', prompt='Enter preferred name for directory. Default is: ')] = 'RememberCLIVault',
     file_name: Annotated[str, typer.Option(prompt='Enter preferred name for new JSON file. Default is: ')] = 'remCLI.json'):
 
+        config_file = Path('config.json')
+        if not config_file.exists():
+            config_file.touch()
+            init_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
+        else:
+            update_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
+
         if not Path(f"{Path.home()}/{directory_name}").exists():
             os.makedirs(f"{Path.home()}/{directory_name}")
         else:
@@ -194,14 +201,6 @@ def init(
         else:
             print(f'JSON file {file_name} already exists in directory. Closing init.')
             raise typer.Exit()
-
-
-        config_file = Path('config.json')
-        if not config_file.exists():
-            config_file.touch()
-            init_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
-        else:
-            update_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
 
         init_json()
 
