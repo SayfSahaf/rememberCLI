@@ -15,7 +15,7 @@ from posix import dup2
 console = Console()
 curr_date = date.today()
 cal_med = calendar.Calendar()
-version = "0.1.7"
+version = "0.1.8"
 config_path = f"{Path.home()}/remembercli_config.json"
 
 app = typer.Typer(
@@ -50,14 +50,14 @@ def update_json(task = None, note = '', date = 'undated'):
 
     path = get_vault_path()
     if not path == 'Error':
-        with open(f'{path}', 'r') as file:
+        with open(path, 'r') as file:
             data = json.load(file)
             if date in data:
                 data[date].append(new_item)
             else:
                 data[date] = []
                 data[date].append(new_item)
-        with open(f'{path}', 'w') as file:
+        with open(path, 'w') as file:
             json.dump(data, file, indent=4, sort_keys=True)
     else:
         print("Error fetching file path")
