@@ -15,8 +15,8 @@ from posix import dup2
 console = Console()
 curr_date = date.today()
 cal_med = calendar.Calendar()
-version = "0.1.6"
-config_path = "../config.json"
+version = "0.1.7"
+config_path = f"{Path.home()}/remembercli_config.json"
 
 app = typer.Typer(
     no_args_is_help=True,
@@ -205,7 +205,7 @@ def init(
             init_json()
         else:
             print(f'JSON file {file_name} already exists in directory. Closing init.')
-            #raise typer.Exit()
+            raise typer.Exit()
 
 
 
