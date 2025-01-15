@@ -57,6 +57,22 @@ Try running `rem` or `rem --help` to see if rememberCLI installed properly.
 Usage
 ---
 
+The commands for rememberCLI were designed to be intuitive and easy to use.
+
+### Important: To use or not to use `--help`
+
+Some commands, like `rem add` or `rem`, will show the help menu with and without the `--help` option explicitly typed.
+
+Therefore, `rem add` is the same as `rem add --help`. Similarly, `rem` is the same as `rem --help`.
+
+This is because `rem add` only adds an item when it receives arguments (inputs). Without any arguments, it defaults to showing the help menu.
+
+The `rem` command works the same. It expects additional commands and arguments to know what exactly to do. Without them, it defaults to also showing the help menu.
+
+However, `rem show` and `rem init` can work without any additional arguments or options passed to them. So the only way to show the help menu would be to explicitly type the `--help` option.
+
+Therefore, it is recommended to always use the `--help` option when it doubt to avoid unintentionally running any commands.
+
 ### Important: Initializing rememberCLI after install
 
 To use rememberCLI, you have to initialize a directory and a JSON file. Don't worry, you only have to run the following command
@@ -70,7 +86,155 @@ This command does three things:
 2. Then, it creates a vault directory in your home directly where your vault file will live
 3. And finally, it creates a vault.json file that will contain all rememberCLI data
 
-Typically, you will only need to run this command once. If your config file, vault file, or the vault folder is accidently deleted for example, you can run this command to repair the errors.
+**rememberCLI will create directories and vault files in the home directory by default.**
 
-### 
+- Typically, you will only need to run this command once, right after installing rememberCLI for the first time. 
+
+- If you wish to use a new vault file, directory, or both, you can run this command again. 
+
+- Make sure that you use a different directory name if you wish to keep using the same name for your vault file, or if you wish to keep using the same directory as before but want to use a new vault file, make sure the name of the vault file is different than the existing one. Your config file will be updated to point to your new vault file accordingly.
+
+- You can also run the command to switch between different directories and vault files. Make sure to enter the names correctly or the init command will create unwanted directories and vault files.
+
+### Adding a Task/Note: the `add` command
+
+To add an item to rememberCLI, you will use the `add` command.
+
+Go ahead and run the following command(s) to see all the options available to the `add` command
+
+```
+rem add
+```
+or
+
+```
+rem add --help
+```
+
+At the present, the `add` command has three additional options available to it.
+
+**It is important that you use quotes, double or single, to pass in arguments (inputs). Without quotes, rememberCLI, and other CLI tools in general, will think that you have passed in a command and will start looking for it in its source files.**
+
+#### Adding a task for a given day
+
+To add a task for a given day, you would use the following format
+
+```
+rem add 'today's task'
+```
+
+#### Adding a task with a note for a given day
+
+To add a task and an associated note, you would use the following format
+
+```
+rem add 'today's task' --note 'note for the task'
+```
+
+#### Adding a note without any corresponding task for a given day
+
+You can add a standalone note with the following format
+
+```
+rem add --note 'a note'
+```
+
+#### Adding a task for the next day
+
+You can use the following format to add a task for the next day
+
+```
+rem add 'tomorrow's task' --tom
+```
+
+#### Adding a task and a note for the next day
+
+You can use the following format to add a task and an associated note for the next day
+
+```
+rem add 'tomorrow's task' --note 'note for task' --tom
+```
+
+#### Adding a note for the next day
+
+You can use the following format to add a standalone note for the next day
+
+```
+rem add --note 'a note' --tom
+```
+
+### Important: adding items for a specific date using the `--for` option
+
+The `--for` option can read date inputs in various formats thanks to the powerful [dateparser](https://dateparser.readthedocs.io/en/latest/) library, but it still has its limitations.
+
+I would encourage you to take a look at the official documentation of the [dateparser](https://dateparser.readthedocs.io/en/latest/) library to get on top of the acceptable formats.
+
+**As of right now, rememberCLI doesn't support time parsing**
+
+#### Adding a task for a specific date
+
+You can use the following formats to add a task for a specific date.
+
+```
+rem add 'a task' --for 'Jan 5, 2025'
+```
+```
+rem add 'a task' --for '23-06-2025'
+```
+```
+rem add 'a task' --for '4th January, 2025'
+```
+
+#### Adding a task and a note for a specific date
+
+You can use the following formats to add a task and an associated note for a specific date.
+
+```
+rem add 'a task' --note 'note for task' --for 'Jan 5, 2025'
+```
+```
+rem add 'a task' --note 'note for task' --for '23-06-2025'
+```
+```
+rem add 'a task' --note 'note for task' --for '4th January, 2025'
+```
+
+#### Adding a note for a specific date
+
+You can use the following formats to add a standalone note for a specific date.
+
+```
+rem add --note 'a note' --for 'Jan 5, 2025'
+```
+```
+rem add --note 'a note' --for '23-06-2025'
+```
+```
+rem add --note 'a note' --for '4th January, 2025'
+```
+
+#### Adding an undated task
+
+You can add a task without any specific dates by using the following format
+
+```
+rem add 'a task' --undated
+```
+
+#### Adding an undated task and a note
+
+You can add a task and an associated note without any specific dates by using the following format
+
+```
+rem add 'a task' --note 'task for note' --undated
+```
+
+#### Adding an undated note
+
+You can add a standalone note without any specific dates by using the following format
+
+```
+rem add 'a note' --undated
+```
+
 
