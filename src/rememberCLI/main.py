@@ -129,9 +129,7 @@ def get_tomorrow(date):
     m1 = str_date.strftime("%m")
     y1 = str_date.strftime("%Y")
 
-    tom = date(int(y1), int(m1), (int(d1) + 1))
-
-    return tom
+    return date(int(y1), int(m1), (int(d1) + 1))
 
 
 def get_week_number(date):
