@@ -34,7 +34,7 @@ Usually, pip is included with a Python installation. You can run the following c
 pip --version
 ```
 
-If pip isn't installed, run the following code from the [official pip documentation](https://pip.pypa.io/en/stable/installation/) to installed it.
+If pip isn't installed, run the following code from the [official pip documentation](https://pip.pypa.io/en/stable/installation/) to install it.
 
 ```
 python -m ensurepip --upgrade
@@ -73,7 +73,7 @@ However, `rem show` and `rem init` can work without any additional arguments or 
 
 Therefore, it is recommended to always use the `--help` option when it doubt to avoid unintentionally running any commands.
 
-### Important: Initializing rememberCLI after install
+### Important: Initializing rememberCLI after installation
 
 To use rememberCLI, you have to initialize a directory and a JSON file. Don't worry, you only have to run the following command
 
