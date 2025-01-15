@@ -20,7 +20,7 @@ app = typer.Typer(
     no_args_is_help=True,
     rich_markup_mode='rich',
     help='A CLI task management tool for the distracted!',
-    epilog='Made with [red]:heart:[/red] by [violet]Saysah[/violet]. Version 0.1.3'
+    epilog='Made with [red]:heart:[/red] by [violet]Saysah[/violet]. Version 0.1.5'
 )
 
 
@@ -185,12 +185,7 @@ def init(
     directory_name: Annotated[str, typer.Option('--dir-name', prompt='Enter preferred name for directory. Default is: ')] = 'RememberCLIVault',
     file_name: Annotated[str, typer.Option(prompt='Enter preferred name for new JSON file. Default is: ')] = 'remCLI.json'):
 
-        config_file = Path('./config.json')
-        if not config_file.exists():
-            config_file.touch()
-            init_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
-        else:
-            update_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
+
 
         if not Path(f"{Path.home()}/{directory_name}").exists():
             os.makedirs(f"{Path.home()}/{directory_name}")
@@ -200,11 +195,19 @@ def init(
 
         if not Path(f"{Path.home()}/{directory_name}/{file_name}").is_file():
             Path(f"{Path.home()}/{directory_name}/{file_name}").touch()
+            init_json()
         else:
             print(f'JSON file {file_name} already exists in directory. Closing init.')
-            raise typer.Exit()
+            #raise typer.Exit()
 
-        init_json()
+        config_file = Path("config.json")
+        if not config_file.exists():
+            config_file.touch()
+            init_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
+        else:
+            update_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
+
+
 
 
 @app.command(no_args_is_help=True, help='Add an independent task, an independent note, or a related task and note.')
