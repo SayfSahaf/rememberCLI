@@ -59,6 +59,8 @@ Usage
 
 The commands for rememberCLI were designed to be intuitive and easy to use.
 
+When in doubt, use the `--help` option for learn more about a particular command. E.g. `rem show --help`
+
 ### Important: To use or not to use `--help`
 
 Some commands, like `rem add` or `rem`, will show the help menu with and without the `--help` option explicitly typed.
@@ -238,5 +240,55 @@ rem add 'a note' --undated
 ```
 
 ### Viewing tasks/notes: the `show` command
+
+#### Viewing all tasks and notes for a given day
+
+You can view all your tasks and notes for a given day by running the following code
+
+```
+rem show
+```
+
+#### Viewing all tasks only for a given day
+
+You can view all your tasks for a given day by running the following code
+
+```
+rem show --task
+```
+
+#### View all notes for a given day
+
+Likewise, you can view all your notes for a given day by running the following code
+
+```
+rem show --note
+```
+
+#### Viewing all tasks and notes for the next day
+
+You can view all your tasks and notes for the next day by running the following code
+
+```
+rem show --tom
+```
+
+#### Viewing all tasks only for the next day
+
+You can view all your tasks for a given day by running the following code
+
+```
+rem show --task --tom
+```
+
+#### View all notes for the next day
+
+Likewise, you can view all your notes for a given day by running the following code
+
+```
+rem show --note --tom
+```
+
+
 
 
