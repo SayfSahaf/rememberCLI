@@ -10,6 +10,7 @@ from datetime import date, datetime
 import os
 import calendar
 import json
+from posix import dup2
 
 console = Console()
 curr_date = date.today()
@@ -19,7 +20,7 @@ app = typer.Typer(
     no_args_is_help=True,
     rich_markup_mode='rich',
     help='A CLI task management tool for the distracted!',
-    epilog='Made with [red]:heart:[/red] by [violet]Saysah[/violet]'
+    epilog='Made with [red]:heart:[/red] by [violet]Saysah[/violet]. Version 0.1.3'
 )
 
 
