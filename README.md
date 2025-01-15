@@ -16,7 +16,7 @@ Prerequisites
 ---
 
 ### Python
-The current version of remembeCLI was developed in a virtual environment running Python 3.12 so make sure your machine has the same or a newer version of python installed.
+The current version of rememberCLI was developed in a virtual environment running Python 3.12 so make sure your machine has the same or a newer version of python installed.
 
 This [article](https://realpython.com/installing-python/) by Real Python is an in-depth guide for installing Python on various operating systems.
 
@@ -113,7 +113,7 @@ rem add --help
 
 At the present, the `add` command has three additional options available to it.
 
-**It is important that you use quotes, double or single, to pass in arguments (inputs). Without quotes, rememberCLI, and other CLI tools in general, will think that you have passed in a command and will start looking for it in its source files.**
+**It is important that you use quotes, double or single, to pass in arguments (inputs). Without quotes, rememberCLI, and other CLI tools in general, will think of your inputs as commands it has to look for and execute.**
 
 #### Adding a task for a given day
 
@@ -236,5 +236,7 @@ You can add a standalone note without any specific dates by using the following 
 ```
 rem add 'a note' --undated
 ```
+
+### Viewing tasks/notes: the `show` command
 
 
