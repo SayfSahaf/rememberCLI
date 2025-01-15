@@ -15,12 +15,14 @@ from posix import dup2
 console = Console()
 curr_date = date.today()
 cal_med = calendar.Calendar()
+version = "0.1.6"
+config_path = "../config.json"
 
 app = typer.Typer(
     no_args_is_help=True,
     rich_markup_mode='rich',
     help='A CLI task management tool for the distracted!',
-    epilog='Made with [red]:heart:[/red] by [violet]Saysah[/violet]. Version 0.1.5'
+    epilog=f'Made with [red]:heart:[/red] by [violet]Saysah[/violet]. Version {version}'
 )
 
 
@@ -62,7 +64,7 @@ def update_json(task = None, note = '', date = 'undated'):
 
 
 def init_config(updated_path):
-    with open('config.json', 'w') as file:
+    with open(config_path, 'w') as file:
 
         data = {
             'activeVaultPath': f'{updated_path}'
@@ -72,19 +74,19 @@ def init_config(updated_path):
 
 
 def update_config(updated_path):
-    with open('config.json', 'r') as file:
+    with open(config_path, 'r') as file:
 
         data = json.load(file)
         data['activeVaultPath'] = f'{updated_path}'
 
-    with open('config.json', 'w') as file:
+    with open(config_path, 'w') as file:
 
         json.dump(data, file, indent=4)
 
 
 def check_vault_path():
-    if Path('config.jason').exists:
-        with open('config.json', 'r') as file:
+    if Path(config_path).exists:
+        with open(config_path, 'r') as file:
             data = json.load(file)
             if Path(f'{data['activeVaultPath']}').exists:
                 return True
@@ -96,7 +98,7 @@ def check_vault_path():
 
 def get_vault_path():
     if check_vault_path():
-        with open('config.json', 'r') as file:
+        with open(config_path, 'r') as file:
             data = json.load(file)
             return data['activeVaultPath']
     else:
@@ -185,7 +187,12 @@ def init(
     directory_name: Annotated[str, typer.Option('--dir-name', prompt='Enter preferred name for directory. Default is: ')] = 'RememberCLIVault',
     file_name: Annotated[str, typer.Option(prompt='Enter preferred name for new JSON file. Default is: ')] = 'remCLI.json'):
 
-
+        config_file = Path(config_path)
+        if not config_file.exists():
+            config_file.touch()
+            init_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
+        else:
+            update_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
 
         if not Path(f"{Path.home()}/{directory_name}").exists():
             os.makedirs(f"{Path.home()}/{directory_name}")
@@ -200,12 +207,7 @@ def init(
             print(f'JSON file {file_name} already exists in directory. Closing init.')
             #raise typer.Exit()
 
-        config_file = Path("config.json")
-        if not config_file.exists():
-            config_file.touch()
-            init_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
-        else:
-            update_config(Path(f"{Path.home()}/{directory_name}/{file_name}"))
+
 
 
 
