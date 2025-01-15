@@ -128,8 +128,8 @@ wheels = [
 
 [[package]]
 name = "remembercli"
-version = "0.1.0"
-source = { virtual = "." }
+version = "0.1.1"
+source = { editable = "." }
 dependencies = [
     { name = "dateparser" },
     { name = "typer" },
