@@ -15,7 +15,7 @@ from posix import dup2
 console = Console()
 curr_date = date.today()
 cal_med = calendar.Calendar()
-version = "0.1.12"
+version = "0.1.13"
 config_path = f"{Path.home()}/remembercli_config.json"
 
 app = typer.Typer(
