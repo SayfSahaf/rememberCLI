@@ -15,7 +15,7 @@ from posix import dup2
 console = Console()
 curr_date = date.today()
 cal_med = calendar.Calendar()
-version = "0.1.8"
+version = "0.1.11"
 config_path = f"{Path.home()}/remembercli_config.json"
 
 app = typer.Typer(
@@ -129,7 +129,9 @@ def get_tomorrow(date):
     m1 = str_date.strftime("%m")
     y1 = str_date.strftime("%Y")
 
-    return date(int(y1), int(m1), (int(d1) + 1))
+    tom = date.fromisoformat(f"{int(y1)}-{int(m1)}-{(int(d1) + 1)}")
+
+    return tom
 
 
 def get_week_number(date):
