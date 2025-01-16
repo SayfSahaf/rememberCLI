@@ -4,7 +4,7 @@ A simple task managing CLI program written in [Python](https://www.python.org/),
 
 The design of the program was heavily influenced by the amazing [CLI Guidlines](https://clig.dev/).
 
-This program is also uses the powerful date parsing tool in [dateparser](https://dateparser.readthedocs.io/en/latest/) to process stdin date inputs.
+This program is also uses the powerful date parsing tool in [dateparser](https://dateparser.readthedocs.io/en/latest/) to process stdin date inputs, as well as [dateutil](https://dateutil.readthedocs.io/en/stable/) to work with date objects.
 
 All data are stored locally as JSON.
 
@@ -16,13 +16,16 @@ Prerequisites
 ---
 
 ### Python
+
+**Note that most modern computers come with a version of python installed. It is recommended that you leave this version of Python untouched as your machine uses it to run processes.**
+
 The current version of rememberCLI was developed in a virtual environment running Python 3.12 so make sure your machine has the same or a newer version of python installed.
 
 This [article](https://realpython.com/installing-python/) by Real Python is an in-depth guide for installing Python on various operating systems.
 
 After you get Python installed, be sure to add it to PATH. This [article](https://realpython.com/add-python-to-path/), also by Real Python, explains what PATH is and how to add your fresh Python install to it.
 
-You could also opt to take a look at the [official Python website](https://www.python.org/) instead.
+You can also opt to take a look at the [official Python website](https://www.python.org/) instead.
 
 ### pip
 
@@ -43,7 +46,7 @@ python -m ensurepip --upgrade
 Installation
 ---
 
-Installing rememberCLI should be fairly easy and straightforward.
+Installing rememberCLI is straightforward.
 
 Run the following code to install rememberCLI
 
@@ -281,7 +284,7 @@ You can view all your tasks for a given day by running the following code
 rem show --task --tom
 ```
 
-#### View all notes for the next day
+#### View all notes only for the next day
 
 Likewise, you can view all your notes for a given day by running the following code
 
@@ -289,6 +292,152 @@ Likewise, you can view all your notes for a given day by running the following c
 rem show --note --tom
 ```
 
+#### Viewing all tasks and notes for the current week
+
+You can view all your tasks and notes for the current by running the following code
+
+```
+rem show --week
+```
+
+#### Viewing all tasks only for the current week
+
+You can view all your tasks for a given day by running the following code
+
+```
+rem show --task --week
+```
+
+#### View all notes only for the current week
+
+Likewise, you can view all your notes for a given day by running the following code
+
+```
+rem show --note --week
+```
+
+#### Viewing all tasks and notes for a specific date
+
+You can view all your tasks and notes for a specific week by running the following code
+
+```
+rem show --for '11 Feb, 2025'
+```
+
+#### Viewing all tasks only for a specific date
+
+You can view all your tasks for a specific date by running the following code
+
+```
+rem show --task --for 'March 28, 2026'
+```
+
+#### View all notes only for the a specific date
+
+Likewise, you can view all your notes for a specific date by running the following code
+
+```
+rem show --note --for '2027-11-26'
+```
+
+#### Viewing all undated tasks and notes
+
+You can view all your undated tasks and notes by running the following code
+
+```
+rem show --undated
+```
+
+#### Viewing all undated tasks only
+
+You can view all your undated tasks by running the following code
+
+```
+rem show --task --undated
+```
+
+#### View all undated notes only
+
+Likewise, you can view all your undated notes by running the following code
+
+```
+rem show --note --undated
+```
+
+#### View all tasks and notes in the vault
+
+You can view all your tasks and notes in your vault file by running the following code
+
+```
+rem show --all
+```
+
+#### View all tasks in the vault
+
+You can view all your tasks in your vault file by running the following code
+
+```
+rem show --task --all
+```
+
+#### View all notes in the vault
+
+You can view all your notes in your vault file by running the following code 
+
+```
+rem show --note --all
+```
+
+### Removing tasks/notes for the vault: the `clean` command
+
+#### Removing older tasks and notes (excluding undated items)
+
+You can remove all your older tasks and notes from your vault file by running the following code (Note that this command will not touch your undated items)
+
+```
+rem clean
+```
+
+#### Removing undated items
+
+You can remove your undated items from your vault file by running the following code (Note that this command will not touch your items with dates)
+
+```
+rem clean --undated
+```
+
+#### Removing all items
+
+You can remove all items from your vault by running the following code (Use this command with caution)
+
+```
+rem clean --all
+```
 
 
+Uninstallation
+---
 
+You can easily uninstall rememberCLI, and other python packages in general, using pip.
+
+Use the following command to uninstall rememberCLI
+
+```
+pip uninstall remembercli
+```
+
+This command will not delete the vault directory, the fault file, or the config file. Those will have to be manually deleted. This shouldn't be too difficult since all of them will be located in your machine's home directory.
+
+Use the `ls` command to list the contents of your home directory. You should see the rememberCLI vault directory as well as the config file. Then, you can use the `rm -r` command to delete the vault directory and the config file.
+
+**Be extremely careful when using the `rm -r` command as it will recursively delete all the contents of a directory for example, permanently.**
+
+Here's an example of deleting the vault directory and the config file
+
+```
+ls                    // list home directory contents
+
+rm -r [vault_name]    // will delete the directory along with any vault files inside
+
+rm -r [config_file]   // will delete the config file
+```
