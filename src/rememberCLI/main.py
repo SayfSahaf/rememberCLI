@@ -15,7 +15,7 @@ from posix import dup2
 console = Console()
 curr_date = date.today()
 cal_med = calendar.Calendar()
-version = "0.1.11"
+version = "0.1.12"
 config_path = f"{Path.home()}/remembercli_config.json"
 
 app = typer.Typer(
@@ -123,13 +123,13 @@ def get_date_diff(n1, n2):
     return date_diff.days
 
 
-def get_tomorrow(date):
-    str_date = parse(str(date)).date()
+def get_tomorrow(dt):
+    str_date = parse(str(dt)).date()
     d1 = str_date.strftime("%d")
     m1 = str_date.strftime("%m")
     y1 = str_date.strftime("%Y")
 
-    tom = date.fromisoformat(f"{int(y1)}-{int(m1)}-{(int(d1) + 1)}")
+    tom = date(int(y1), int(m1), (int(d1) + 1))
 
     return tom
 
