@@ -15,14 +15,14 @@ from posix import dup2
 console = Console()
 curr_date = date.today()
 cal_med = calendar.Calendar()
-version = "0.1.13"
+version = "0.1.14"
 config_path = f"{Path.home()}/remembercli_config.json"
 
 app = typer.Typer(
     no_args_is_help=True,
     rich_markup_mode='rich',
     help='A CLI task management tool for the distracted!',
-    epilog=f'Made with [red]:heart:[/red] by [violet]Saysah[/violet]. Version {version}'
+    epilog=f'Made with [red]:heart:[/red] by [violet]saysah[/violet]. Version {version}'
 )
 
 
@@ -212,31 +212,31 @@ def init(
 
 
 
-@app.command(no_args_is_help=True, help='Add an independent task, an independent note, or a related task and note.')
+@app.command(no_args_is_help=True, help='Add a task for today')
 def add(
     task: Annotated[Optional[str], typer.Argument(help='Add a task.')] = '',
     note: Annotated[str, typer.Option(help='Add a note.')] = '',
-    today: Annotated[bool, typer.Option('-t', help='Add a task and/or a note for today.')] = False,
+    undated: Annotated[bool, typer.Option('--undated', help='Add undated task and/or note.')] = False,
     tomorrow: Annotated[bool, typer.Option('--tom', help='Add a task and/or a note for tomorrow.')] = False,
     item_date: Annotated[str, typer.Option('--for', help='Set date for a task and/or a note.')] = ''
     ):
 
-    if not today and not tomorrow and not item_date:
+    if undated and not tomorrow and not item_date:
         update_json(task, note)
         print('Item added')
 
-    elif today and not tomorrow and not item_date:
+    elif not undated and not tomorrow and not item_date:
         update_json(task, note, str(curr_date))
         print('Item added')
 
-    elif not today and tomorrow and not item_date:
+    elif not undated and tomorrow and not item_date:
         tom = curr_date.strftime("%d")
         tom = int(tom) + 1
         tom = str(curr_date.strftime(f"%Y-%m-{tom}"))
         update_json(task, note, tom)
         print('Item added')
 
-    elif not today and not tomorrow and item_date:
+    elif not undated and not tomorrow and item_date:
         specific_date = str(parse(item_date).date())
         update_json(task, note, specific_date)
         print('Item added')
